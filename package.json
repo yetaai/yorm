@@ -1,6 +1,6 @@
 {
   "name": "yorm",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "dependencies": {
     "bluebird": "^3.4.6",
     "mysql": "*"
