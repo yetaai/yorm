@@ -1,0 +1,20 @@
+{
+  "name": "yorm",
+  "version": "0.1.7",
+  "dependencies": {
+    "bluebird": "^3.4.6",
+    "mysql": "*"
+  },
+  "description": "A superlight ORM",
+  "main": "yorm.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": [
+    "Mysql",
+    "ORM"
+  ],
+  "author": "yetaai <dj@bigdecimap.com> (http://bigdecimap.com)",
+  "license": "ISC"
+}
