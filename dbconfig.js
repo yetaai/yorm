@@ -5,7 +5,7 @@ var myconfig = {
     connectionLimit: 200,
     host: 'localhost',
     port: 3306,
-    user: 'user1',
+    user: 'user',
     password: 'pass',
     database: lschema,
     debug: false
@@ -14,8 +14,8 @@ var myconfig = {
 var pool
 pool = mysql.createPool(myconfig)
 pool.myconfig = pool.myconfig
+pool.buflist = []
+pool.batchsize = 20
+pool.database = lschema
 
-module.exports.pool = pool
-module.exports.buflist = []
-module.exports.batchsize = 20
-module.exports.database = lschema
+module.exports = pool

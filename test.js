@@ -31,7 +31,7 @@ var test = function() {
     }).catch(function(e) {
         console.log("getone failed"  + e)
     })
-    var typea = yorm.defType('ekko', {'ebeln': {'ref': 'ekko.ebeln'}, 'lifnr' : {'ref': 'ekko.lifnr'}})
+    var typea = yorm.defType('ekko', {'ebeln': {'ref': 'ot1ekko.ebeln'}, 'lifnr' : {'ref': 'ot1ekko.lifnr'}})
 }
 setTimeout(test, 200)
 

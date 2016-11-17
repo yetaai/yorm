@@ -1,5 +1,4 @@
-var dbconfig = require("./dbconfig")
-var pool = dbconfig.pool
+var pool = require("./dbconfig")
 var Promise = require("bluebird");
 var numtypes = ["int", "tinyint", "bigint", "double", "decimal", "smalint", "float"];
 var strtypeTable = 1
@@ -9,18 +8,18 @@ module.exports.bufferinit = function() {
     return new Promise(function (resolve, reject) {
         var result = {};
         var pros = [];
-        var batchsize = dbconfig.batchsize ? dbconfig.batchsize : 20;
+        var batchsize = pool.batchsize ? pool.batchsize : 20;
         var tblarrs = [];
         var tblarr;
         var buflist = []
 
         pool.getConnection(function (errz, connz) {
-            connz.query('select table_name as tn from information_schema.tables where table_schema = "' + dbconfig.database + '"', [], function (erry, rsy) {
+            connz.query('select table_name as tn from information_schema.tables where table_schema = "' + pool.database + '"', [], function (erry, rsy) {
                 if (erry) {
                     reject()
                     return
                 }
-                if (dbconfig.buflist == undefined || dbconfig.buflist.length == 0) {
+                if (pool.buflist == undefined || pool.buflist.length == 0) {
                     for (var i in rsy) {
                         if (i % batchsize == 0) {
                             if (i > 0) {
@@ -32,14 +31,14 @@ module.exports.bufferinit = function() {
                     }
                     tblarrs.push(tblarr);
                 } else {
-                    for (var i in dbconfig.buflist) {
+                    for (var i in pool.buflist) {
                         if (i % batchsize == 0) {
                             if (i > 0) {
                                 tblarrs.push(tblarr);
                             }
                             tblarr = [];
                         }
-                        tblarr.push(dbconfig.buflist[i]);
+                        tblarr.push(pool.buflist[i]);
                     }
                     tblarrs.push(tblarr);
                 }
@@ -149,32 +148,32 @@ var typeDef = function (typename, flds) {
         } else {
             // var sselect = "select "
             // var sfrom = " from "
+            var typecols = []
             for (var i in flds) {
-                sselect = sselect + flds[i].cn + ", "
+                // sselect = sselect + flds[i].cn + ", "
                 if (flds[i].ref) {
                     if (!tbldefs) {
                         throw "Please specify tables definition object";
                     }
-                    var aref = ref.splice(".");
+                    var aref = flds[i].ref.split(".");
                     var tbl = aref[0];
                     var fld = aref[1];
-                    flds[i].tn = tbldefs[tbl][fld].tn;
-                    flds[i].dt = tbldefs[tbl][fld].dt;
-                    flds[i].ct = tbldefs[tbl][fld].ct;
+                    typecols.push(tbldefs[tbl]['cols'][fld])
                 } else {
-                    if (!flds.dt) {
+                    if (!flds[i].dt) {
                         throw "Please either refering to db definition or define datatype with 'dt' for field " + flds[i].cn;
                     }
-                    if (!flds.ct) {
+                    if (!flds[i].ct) {
                         throw "Please either refering to db definition or define datatype with 'ct' for field " + flds[i].cn;
                     }
+                    typecols.push(flds[i])
                 }
             }
-            sselect = sselect.substr(0, sselect.length - 2);
+            // sselect = sselect.substr(0, sselect.length - 2);
             tbldefs[typename] = {};
             tbldefs[typename]["strtype"] = strtypeType
             // tbldefs[typename]["sselect"] = sselect;
-            tbldefs[typename]["cols"] = flds;
+            tbldefs[typename]["cols"] = typecols;
             return tbldefs[typename]
         }
     } catch (e) {
