@@ -15,6 +15,10 @@
     "Mysql",
     "ORM"
   ],
+  "repository" :
+  { "type" : "git"
+  , "url" : "https://github.com/yetaai/yorm.git"
+  },
   "author": "yetaai <dj@bigdecimap.com> (http://bigdecimap.com)",
   "license": "ISC"
 }
