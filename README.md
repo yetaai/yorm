@@ -25,7 +25,7 @@ var test = function() {
 setTimeout(test, 1000)
 ```
 
-# Run your file and check your database by
+# Run the test and check table data by
 
 ```sql
 select * from aa;
