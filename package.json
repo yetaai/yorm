@@ -1,6 +1,6 @@
 {
   "name": "yorm",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "dependencies": {
     "bluebird": "^3.4.6",
     "mysql": "*"
@@ -15,9 +15,9 @@
     "Mysql",
     "ORM"
   ],
-  "repository" :
-  { "type" : "git"
-  , "url" : "https://github.com/yetaai/yorm.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yetaai/yorm.git"
   },
   "author": "yetaai <dj@bigdecimap.com> (http://bigdecimap.com)",
   "license": "ISC"
