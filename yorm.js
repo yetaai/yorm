@@ -218,7 +218,7 @@ var getmany = function (tn, sfilter) {
             if (err) {
                 reject(err);
             } else {
-                if (tbldef.strtype = strtypeType) {
+                if (tbldef.strtype == strtypeType) {
                     reject('This function only table type supported right now')
                     return
                 }
