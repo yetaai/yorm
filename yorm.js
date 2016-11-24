@@ -25,7 +25,6 @@ var pool = function() {
     }
 }()
 
-
 module.exports.bufferinit = function() {
     return new Promise(function (resolve, reject) {
         var result = {};
@@ -160,8 +159,26 @@ module.exports.bufferinit().then(function (value) {
     module.exports.refreshone = refreshone
     module.exports.saveone = saveone
     module.exports.savemany = savemany
+    module.exports.query = query
 })
 
+var query = function(ssql) {
+    return new Promise(function(resolve, reject) {
+        pool.getConnection(function(err, conn) {
+            if (err) {
+                reject(err)
+            } else {
+                conn.query(ssql, [], function(err1, rs) {
+                    if (err1) {
+                        reject(err1)
+                    } else {
+                        resolve(rs)
+                    }
+                })
+            }
+        })
+    })
+}
 var typeDef = function (typename, flds) {
     var tbldefs = module.exports.tbldefs
     try {
