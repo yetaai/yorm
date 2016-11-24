@@ -1,8 +1,30 @@
-var pool = require("./dbconfig")
+// var pool = require("./dbconfig")
 var Promise = require("bluebird");
 var numtypes = ["int", "tinyint", "bigint", "double", "decimal", "smalint", "float"];
 var strtypeTable = 1
 var strtypeType = 2
+
+var pool = function() {
+    var fullpath = __dirname
+    var path = fullpath.split('/')
+    if (path == undefined || path.length < 1) {
+        console.log('Cannot work out directory structure for reading config file. Failed to load yorm...')
+        throw new Error("Failed loading yorm!!")
+    } else {
+        if (path[path.length - 1] == "yorm" && path[path.length - 2] == "node_modules") {
+            vpool = require("../../dbconfig")
+        } else {
+            console.log('No user dbconfig find. Try to use local db test with user/pass for testing purpose')
+            vpool = require("./dbconfig")
+        }
+        if (vpool == undefined) {
+            throw new Error("Cannot load dbconfig. You can create dbconfig.js in your root folder...")
+        } else {
+            return vpool
+        }
+    }
+}()
+
 
 module.exports.bufferinit = function() {
     return new Promise(function (resolve, reject) {
