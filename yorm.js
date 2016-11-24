@@ -159,9 +159,7 @@ module.exports.bufferinit().then(function (value) {
     module.exports.refreshone = refreshone
     module.exports.saveone = saveone
     module.exports.savemany = savemany
-    module.exports.query = query
 })
-
 var query = function(ssql) {
     return new Promise(function(resolve, reject) {
         pool.getConnection(function(err, conn) {
@@ -179,6 +177,7 @@ var query = function(ssql) {
         })
     })
 }
+module.exports.query = query
 var typeDef = function (typename, flds) {
     var tbldefs = module.exports.tbldefs
     try {
