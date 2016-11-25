@@ -9,9 +9,31 @@ var test = function() {
         tt = {}
         tt.id = i + 3
         // tt.value = 'value ' + tt.id
-        tt.value = 'testing value to be overridden'
+        tt.value = 't' + tt.id
         ta.push(tt)
     }
+
+    yorm.query('delete from zz').then(function() {
+        return new Promise(function(resolve, reject) {
+            yorm.saveone('zz', {'id':0, 'value': 0}).then(function(){
+                resolve()
+            })
+        })
+    }).then(function() {
+        return new Promise(function(resolve, reject) {
+            yorm.savemany('zz', ta).then(function(){
+                resolve()
+            })
+        })
+    }).then(function() {
+        yorm.getmany('zz', '').then(function(rs){
+            console.log('Database contents after insert by saveone and savemany: ' + JSON.stringify(rs))
+            process.exit(0)
+        })
+    }).catch(function(e) {
+        console.log('error in savemany, saveone, getmany: ' + e)
+        process.exit(-1)
+    })
     // yorm.refreshByKey('zz', ta, ['value'], {'id': 'asc'}, 100).then(function() {
     //     console.log('ta: ' + JSON.stringify(ta))
     // })
@@ -21,17 +43,10 @@ var test = function() {
     //     console.log('value of value: ' + JSON.stringify(value))
     //     console.log('value of ta: ' + JSON.stringify(ta))
     // })
-    yorm.getone('zz', {'id': 9}).then(function(value) {
-        console.log('after getone value: ' + JSON.stringify(value))
-    }).catch(function(e) {
-        console.log("getone failed"  + e)
-    })
-    yorm.getone('zz', {'id': 9}).then(function(value) {
-        console.log('after getone value: ' + JSON.stringify(value))
-    }).catch(function(e) {
-        console.log("getone failed"  + e)
-    })
-    var typea = yorm.defType('ekko', {'ebeln': {'ref': 'ot1ekko.ebeln'}, 'lifnr' : {'ref': 'ot1ekko.lifnr'}})
+    // var typea = yorm.defType('ekko', {'ebeln': {'ref': 'ot1ekko.ebeln'}, 'lifnr' : {'ref': 'ot1ekko.lifnr'}})
 }
-setTimeout(test, 200)
+yorm.bufferinit().then(function() {
+    test()
+})
+//setTimeout(test, 200) //You donot have to call bufferinit always if you call is certain time after yorm loading.
 

@@ -609,10 +609,19 @@ var saveone = function (tn, one) {
                 continue
             }
             sfld = sfld + key + ', '
-            if (one[key] == undefined || one[key] == null) {
-                sval = sval + null + ', '
+            var dt = cols0[key].dt;
+            if (one[key] !== undefined && one[key] !== null) {
+                if (numtypes.indexOf(dt) < 0) {
+                    sval = sval + "'" + one[key] + "', ";
+                } else {
+                    if (isNaN(one[key])) {
+                        reject(tn + "." + key + " must be numeric. But the encountered is: " + one[key]);
+                        return
+                    }
+                    sval = sval + one[key] + ", ";
+                }
             } else {
-                sval = sval + '"' + one[key] + '", '
+                sval = sval + "null, "
             }
         }
         sfld = sfld.substr(0, sfld.length - 2) + ') '
@@ -687,7 +696,7 @@ var savemany = function (tn, objs, pbatchsize, dupup) {
             for (var key in one) {
                 if (tblcols[key]) {
                     var dt = tblcols[key].dt;
-                    if (one[key]) {
+                    if (one[key] !== undefined && one[key] !== null) {
                         if (numtypes.indexOf(dt) < 0) {
                             svaluesone = svaluesone + "'" + one[key] + "', ";
                         } else {
