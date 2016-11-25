@@ -69,7 +69,7 @@ module.exports.bufferinit = function() {
                 var swheredef;
                 for (var i in tblarrs) {
                     tblarr = tblarrs[i];
-                    swheredef = " where table_name in (";
+                    swheredef = ' where table_schema = "' + pool.database + '" and  table_name in (';
                     for (var j in tblarr) {
                         swheredef = swheredef + "'" + tblarr[j] + "', ";
                     }
