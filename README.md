@@ -8,7 +8,7 @@ Create your database configuration in dbconfig.js in your project root folder. T
 
 Then create your application tables. You can also define your own structure types as well.
 
-Below example will call parallelly execute saveone and savemany.
+Below example will call parallelly saveone and savemany.
 
 ```sql
 create table aa(id1 int, id2 int, val1 char(20), primary key(id1, id2)

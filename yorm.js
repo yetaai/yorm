@@ -37,7 +37,11 @@ module.exports.bufferinit = function() {
         pool.getConnection(function (errz, connz) {
             connz.query('select table_name as tn from information_schema.tables where table_schema = "' + pool.database + '"', [], function (erry, rsy) {
                 if (erry) {
-                    reject()
+                    reject(erry)
+                    return
+                }
+                if (rsy.length == 0) {
+                    resolve (undefined)
                     return
                 }
                 if (pool.buflist == undefined || pool.buflist.length == 0) {
