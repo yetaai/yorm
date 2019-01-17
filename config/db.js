@@ -1,3 +1,4 @@
+//This is an example of config
 var Promise = require('bluebird')
 var mysql = require('mysql')
 var lschema = 'test'

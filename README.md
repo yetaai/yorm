@@ -16,7 +16,7 @@ npm install yorm -s
 
 # Usage
 
-Create your database configuration in dbconfig.js in your project root folder. There is a sample with yorm module folder.
+Create your database configuration in db.js in your project root folder. There is a sample with yorm module folder.
 
 Then create your application tables. You can also define your own structure types as well.
 
