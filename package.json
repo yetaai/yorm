@@ -1,8 +1,7 @@
 {
   "name": "yorm",
-  "version": "0.1.20",
+  "version": "1.0.1",
   "dependencies": {
-    "bluebird": "^3.4.6",
     "mysql": "*"
   },
   "description": "A superlight ORM",

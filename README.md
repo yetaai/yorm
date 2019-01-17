@@ -1,3 +1,15 @@
+# Releases
+===
+
+1.0.1: Major upgrade
+
+    Transaction supportof mysql can be used now by just pass a connection object to saveone and savemany.
+    No more Bluebird dependency since it is part of node now.
+    Better module exports organization.
+    Config file name changed to config/db.js
+
+0.1.20: Previous one
+
 # Install Locally is recommended
 
 npm install yorm -s
