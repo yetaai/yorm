@@ -1,8 +1,11 @@
 # Releases
 
+1.0.2: Readme update
+
 1.0.1: Major upgrade
 
     Transaction supportof mysql can be used now by just pass a connection object to saveone and savemany.
+    Bufferinit has to be called first now if it is the first time to call any function.
     No more Bluebird dependency since it is part of node now.
     Better module exports organization.
     Config file name changed to config/db.js
@@ -33,7 +36,7 @@ onerecord.id2 = '20'
 onerecord.val1 = 'Testing value'
 
 var test = function() {
-   yorm.saveone('aa', onerecord)
+    yorm.saveone('aa', onerecord)
     var records = []
     for (var i = 0; i < 10, i++) {
       for (var j = 0; j < 3, j++ {
@@ -46,7 +49,8 @@ var test = function() {
     }
 }
 
-setTimeout(test, 1000)
+#Now you have to call bufferinit for first time call. So change setTimeout(test, 1000) to below:
+yorm.bufferinit().then(test)
 ```
 
 # Run the test and check table data by
