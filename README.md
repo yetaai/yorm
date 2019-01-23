@@ -4,7 +4,7 @@
 
 1.0.1: Major upgrade
 
-    Transaction supportof mysql can be used now by just pass a connection object to saveone and savemany.
+    Transaction support of mysql can be used now by just pass a connection object to saveone and savemany.
     Bufferinit has to be called first now if it is the first time to call any function.
     No more Bluebird dependency since it is part of node now.
     Better module exports organization.
