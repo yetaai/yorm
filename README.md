@@ -1,6 +1,6 @@
 # Releases
 
-1.0.2: Readme update
+1.0.2, 1.0.3: Readme update
 
 1.0.1: Major upgrade
 
@@ -18,7 +18,7 @@ npm install yorm -s
 
 # Usage
 
-Create your database configuration in db.js in your project root folder. There is a sample with yorm module folder.
+Create your database configuration in db.js in your project root/config folder. There is a sample with yorm module folder.
 
 Then create your application tables. You can also define your own structure types as well.
 
@@ -59,6 +59,6 @@ yorm.bufferinit().then(test)
 select * from aa;
 ```
 
-Your will see the value inserted. Also in above example, savemany will assemble sql statemnets in batch in the form of insert into ... on duplicate update ... But you have to enable on duplicate update by set relevant parameter to true.
+Your will see the value inserted. Also in the above example, savemany will assemble sql statemnets in batch in the form of insert into ... on duplicate update ... But you have to enable on duplicate update by set relevant parameter to true.
 
 I will deliver an API document if more persons are interested in this project.
